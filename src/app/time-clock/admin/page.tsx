@@ -1,5 +1,10 @@
 import TimeClockAdmin from "@/components/TimeClockAdmin";
+import PasswordGate from "@/components/PasswordGate";
 
 export default function TimeClockAdminPage() {
-  return <TimeClockAdmin />;
+  return (
+    <PasswordGate>
+      <TimeClockAdmin />
+    </PasswordGate>
+  );
 }

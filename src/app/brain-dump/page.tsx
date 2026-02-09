@@ -1,5 +1,10 @@
 import ProjectTracker from "@/components/ProjectTracker";
+import PasswordGate from "@/components/PasswordGate";
 
 export default function BrainDumpPage() {
-  return <ProjectTracker />;
+  return (
+    <PasswordGate>
+      <ProjectTracker />
+    </PasswordGate>
+  );
 }
