@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
-type Theme = "dark" | "light";
+type Theme = "light" | "dark";
 
 interface ThemeContextType {
   theme: Theme;
@@ -12,7 +12,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [theme, mounted]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   return (
@@ -46,7 +46,7 @@ export function useTheme(): ThemeContextType {
   // Return default values if not within provider (during SSR)
   if (!context) {
     return {
-      theme: "dark",
+      theme: "light",
       toggleTheme: () => {},
     };
   }

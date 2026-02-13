@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useTheme } from "@/lib/theme";
 
 const microApps = [
@@ -26,11 +27,11 @@ const microApps = [
     color: "#8b5cf6",
   },
   {
-    name: "New Contact Commission",
+    name: "New Customer Fee",
     description: "First-visit commission calculator",
     href: "/new-contact-commission",
-    icon: "💰",
-    color: "#22c55e",
+    icon: "/wh-logo-circle-bw.png",
+    color: "#b5a49d",
   },
 ];
 
@@ -97,8 +98,12 @@ export default function Home() {
                 e.currentTarget.style.borderColor = "var(--border-light)";
               }}
             >
-              <span className="text-5xl group-hover:scale-110 transition-transform duration-200">
-                {app.icon}
+              <span className="text-5xl group-hover:scale-110 transition-transform duration-200 flex items-center justify-center">
+                {app.icon.startsWith("/") ? (
+                  <Image src={app.icon} alt={app.name} width={48} height={48} className="rounded-full" />
+                ) : (
+                  app.icon
+                )}
               </span>
               <div className="text-center">
                 <p
