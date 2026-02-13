@@ -25,6 +25,13 @@ const microApps = [
     icon: "✍️",
     color: "#8b5cf6",
   },
+  {
+    name: "New Contact Commission",
+    description: "First-visit commission calculator",
+    href: "/new-contact-commission",
+    icon: "💰",
+    color: "#22c55e",
+  },
 ];
 
 export default function Home() {
