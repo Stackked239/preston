@@ -45,26 +45,26 @@ export default function Home() {
     >
       {/* Header */}
       <header
-        className="flex items-center justify-between px-10 py-6 border-b"
+        className="flex flex-col items-center justify-center px-10 py-8 border-b relative"
         style={{ borderColor: "var(--border-color)" }}
       >
-        <div>
-          <h1
-            className="text-[26px] font-light tracking-[4px] uppercase m-0"
-            style={{ color: "var(--gold)" }}
-          >
-            WHB Companies
-          </h1>
-          <p
-            className="text-[11px] font-sans tracking-[2px] uppercase mt-1"
-            style={{ color: "var(--text-muted)" }}
-          >
-            Command Center
-          </p>
-        </div>
+        <Image
+          src="/whb-legacy-vert-bw.png"
+          alt="WHB Legacy"
+          width={120}
+          height={100}
+          className="object-contain"
+          style={{ filter: theme === "dark" ? "invert(1)" : "none" }}
+        />
+        <p
+          className="text-[11px] font-sans tracking-[2px] uppercase mt-3"
+          style={{ color: "var(--text-muted)" }}
+        >
+          Command Center
+        </p>
         <button
           onClick={toggleTheme}
-          className="border px-3 py-1.5 rounded-md text-xs font-sans tracking-[1px] uppercase transition-all"
+          className="absolute right-10 top-1/2 -translate-y-1/2 border px-3 py-1.5 rounded-md text-xs font-sans tracking-[1px] uppercase transition-all"
           style={{ borderColor: "var(--border-color)", color: "var(--gold)" }}
         >
           {theme === "dark" ? "☀ Light" : "● Dark"}
