@@ -55,15 +55,24 @@ export function calculateCommissions(
       staffMap.set(s.staffId, `${s.firstName} ${s.lastName}`.trim());
     }
 
-    // Filter appointments to first-visit clients, active/non-deleted, with price
-    const eligibleAppointments = appointments.filter(
-      (appt) =>
-        firstVisitClientIds.has(appt.clientId) &&
-        appt.activationState !== "CANCELED" &&
-        !appt.deleted &&
-        appt.price != null &&
-        appt.price > 0
-    );
+    // Filter appointments to first-visit clients, on their exact firstVisit date only,
+    // active/non-deleted, with price
+    const eligibleAppointments = appointments.filter((appt) => {
+      if (
+        !firstVisitClientIds.has(appt.clientId) ||
+        appt.activationState === "CANCELED" ||
+        appt.deleted ||
+        appt.price == null ||
+        appt.price <= 0
+      ) {
+        return false;
+      }
+      const client = clientMap.get(appt.clientId);
+      if (!client) return false;
+      const firstVisitDate = client.firstVisit?.split("T")[0];
+      const apptDate = appt.appointmentDate?.split("T")[0];
+      return apptDate === firstVisitDate;
+    });
 
     if (eligibleAppointments.length === 0) continue;
 

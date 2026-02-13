@@ -75,7 +75,7 @@ export async function fetchBranches(): Promise<PhorestBranch[]> {
 
 export async function fetchStaff(branchId: string): Promise<PhorestStaff[]> {
   return fetchAllPages<PhorestStaff>(
-    `/branch/${branchId}/staff?fetch_archived=true`,
+    `/branch/${branchId}/staff`,
     "staffs"
   );
 }

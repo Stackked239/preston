@@ -287,11 +287,15 @@ export default function NewContactCommission() {
                       </span>
                     </div>
 
-                    {/* Client Rows */}
-                    {stylist.clients.map((client) =>
-                      client.services.map((service) => (
+                    {/* Client Rows — one row per client with appointment total */}
+                    {stylist.clients.map((client) => {
+                      const appointmentPrice = client.services.reduce(
+                        (sum, s) => sum + s.price,
+                        0
+                      );
+                      return (
                         <div
-                          key={service.appointmentId}
+                          key={client.clientId}
                           className="flex items-center justify-between px-6 py-2.5 border-b text-sm"
                           style={{ borderColor: "var(--border-light)" }}
                         >
@@ -306,13 +310,7 @@ export default function NewContactCommission() {
                               className="w-28"
                               style={{ color: "var(--text-muted)" }}
                             >
-                              {service.appointmentDate}
-                            </span>
-                            <span
-                              className="flex-1 truncate"
-                              style={{ color: "var(--text-secondary)" }}
-                            >
-                              {service.serviceName}
+                              {client.firstVisitDate}
                             </span>
                           </div>
                           <div className="flex items-center gap-6">
@@ -320,18 +318,18 @@ export default function NewContactCommission() {
                               className="w-20 text-right"
                               style={{ color: "var(--text-secondary)" }}
                             >
-                              ${service.price.toFixed(2)}
+                              ${appointmentPrice.toFixed(2)}
                             </span>
                             <span
                               className="w-20 text-right font-medium"
                               style={{ color: "var(--gold)" }}
                             >
-                              ${service.commission.toFixed(2)}
+                              ${client.clientTotal.toFixed(2)}
                             </span>
                           </div>
                         </div>
-                      ))
-                    )}
+                      );
+                    })}
                   </div>
                 ))}
               </div>
